@@ -33,7 +33,10 @@ def adjust_for_standard_deduction(income, filing_status):
     return max(0, income - deductions[filing_status])
 
 # Example usage
-# print(adjust_for_standard_deduction(100000, "single"))
+print(adjust_for_standard_deduction(135000, "married_filing_jointly"))
+
+
+
 import json
 
 def compute_tax(taxable_income, filing_status):

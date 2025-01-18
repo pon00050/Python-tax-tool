@@ -56,7 +56,66 @@ def calculate_credit_limit_worksheet_a() -> float:
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
         return 0
-
 if __name__ == "__main__":
-    result = calculate_credit_limit_worksheet_a()
+     result = calculate_credit_limit_worksheet_a()
+     print(f"Final result: {result}")
+
+
+def Credits_Qualifying_Children_and_Other_Dependents():
+    """
+    Calculate the credits for qualifying children and other dependents.
+    """
+    # Identify the adjusted gross income
+    adjusted_gross_income = 135000
+
+
+    # Line 2: Enter the amount from Form 2555, line 45, or Form 2555-EZ, line 50
+    puerto_rico_exclusions = 0
+    Form_2555_line_45_and_50 = 0
+    Form_4563_line_15 = 0
+    Additional_Exclusions = puerto_rico_exclusions + Form_2555_line_45_and_50 + Form_4563_line_15
+    # Add Lines 1 and 2d (Additional_Exclusions)
+    Line_3 = adjusted_gross_income + Additional_Exclusions
+
+    # Regarding Lines 4 and 5
+    # Load taxpayer information
+    taxpayer_info_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), CONFIG['data_paths']['taxpayer_information'])
+    with open(taxpayer_info_path, 'r') as f:
+        taxpayer_data = json.load(f)
+    
+    # Count qualifying children (under age 17)
+    from datetime import datetime
+    current_year = datetime.now().year
+    Number_of_Qualifying_Children = sum(
+        1 for dependent in taxpayer_data.get('dependents', [])
+        if (current_year - datetime.strptime(dependent['date_of_birth'], '%Y-%m-%d').year) < 17
+    )
+    
+    Credit_per_Qualifying_Child = 2000
+    # Line 6: Number of other dependents under age 17 or who do not the required social security number
+    # Line 7: Credit per other dependent
+    Number_of_Other_Dependents = 0
+    Credit_per_Other_Dependent = 500
+
+    # Line 8: Total credit for qualifying children and other dependents
+    Total_Credit_for_Qualifying_Children_and_Other_Dependents = (Number_of_Qualifying_Children * Credit_per_Qualifying_Child) + (Number_of_Other_Dependents * Credit_per_Other_Dependent)
+
+    # Line 9: Identify the threshold amount for the filing status
+    filing_status = "married_filing_jointly"
+    Threshold_Amount = 200000
+
+    # Line 10: Subtract the threshold amount from line 3
+    difference = Line_3 - Threshold_Amount
+    if difference >= 0:
+        Line_12 = Total_Credit_for_Qualifying_Children_and_Other_Dependents
+    else:
+        # If income is below threshold, no reduction needed
+        Line_12 = Total_Credit_for_Qualifying_Children_and_Other_Dependents - max(0, (difference // 1000) * 50)
+
+    Line_13 = calculate_credit_limit_worksheet_a()
+
+    child_tax_credit_and_credit_for_other_dependents = min(Line_13, Line_12)
+    return child_tax_credit_and_credit_for_other_dependents
+if __name__ == "__main__":
+    result = Credits_Qualifying_Children_and_Other_Dependents()
     print(f"Final result: {result}")
