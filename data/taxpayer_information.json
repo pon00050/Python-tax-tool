@@ -1,0 +1,69 @@
+{
+    "taxpayer": {
+      "name": "Basset Hound",
+      "tin": "400-00-6003",
+      "date_of_birth": "1988-01-01",
+      "email": "Hound@1040.com",
+      "occupation": "Detective",
+      "address": "1122 Canine Lane, Marietta, GA 30060",
+      "phone": "(828) 524-8020",
+      "best_contact_time": "Noon"
+    },
+    "spouse": {
+      "name": "Grey Hound",
+      "tin": "400-00-6333",
+      "date_of_birth": "1981-01-01",
+      "email": "Grey@1040.com",
+      "occupation": "Teacher"
+    },
+    "dependents": [
+      {
+        "name": "Terrier Hound",
+        "tin": "400-00-4141",
+        "date_of_birth": "2018-01-01",
+        "relationship": "Son",
+        "months_in_home": 12,
+        "childcare": {
+          "provider_name": "Sunny Daycare",
+          "ein": "40-0001111",
+          "address": "700 Bright Circle, Marietta, GA, 30060",
+          "monthly_cost": 450,
+          "annual_cost": 5400
+        }
+      },
+      {
+        "name": "Dachshund Hound",
+        "tin": "400-00-5151",
+        "date_of_birth": "2016-05-01",
+        "relationship": "Son",
+        "months_in_home": 12,
+        "childcare": {
+          "provider_name": "Sunny Daycare",
+          "ein": "40-0001111",
+          "address": "700 Bright Circle, Marietta, GA, 30060",
+          "monthly_cost": 450,
+          "annual_cost": 5400
+        }
+      }
+    ],
+    "filing_status": "married_filing_jointly",
+    "income": {
+      "basset": {
+        "wages": 75000,
+        "federal_tax_withheld": 8000,
+        "social_security_tax_withheld": 4650,
+        "medicare_tax_withheld": 1088
+      },
+      "grey": {
+        "wages": 60000,
+        "federal_tax_withheld": 5000,
+        "social_security_tax_withheld": 3720,
+        "medicare_tax_withheld": 870
+      },
+      "total_income": 135000
+    },
+    "health_coverage": {
+      "covered_all_year": true
+    }
+  }
+  

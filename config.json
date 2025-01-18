@@ -1,0 +1,8 @@
+{
+    "data_paths": {
+        "taxpayer_information": "data/taxpayer_information.json",
+        "tax_table": "data/Complete_Tax_Tables.json",
+        "rate_schedule": "data/Tax_computations_Line16.json",
+        "standard_deductions": "data/Standard_Deductions.json"
+    }
+}

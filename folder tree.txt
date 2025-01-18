@@ -1,0 +1,14 @@
+tax_tool/
+├── main.py                 # Entry point
+├── taxpayer_information.json
+├── modules/
+│   ├── tax_utils.py        # Tax calculations
+│   ├── forms_utils.py      # IRS forms logic
+│   ├── worksheet_utils.py  # Worksheets and credits
+│   ├── schedule_utils.py   # Additional schedules
+├── tests/
+│   ├── test_tax_utils.py   # Unit tests
+│   ├── test_worksheets.py
+├── data/
+│   ├── tax_table.json      # Tax tables
+│   ├── rate_schedule.json  # Rate schedules

@@ -1,0 +1,172 @@
+{
+  "tax_brackets": {
+    "single": [
+      {
+        "income_range": {
+          "min": 100000,
+          "max": 100525
+        },
+        "tax_rate": 0.22,
+        "subtract_amount": 4947.00
+      },
+      {
+        "income_range": {
+          "min": 100525,
+          "max": 191950
+        },
+        "tax_rate": 0.24,
+        "subtract_amount": 6957.50
+      },
+      {
+        "income_range": {
+          "min": 191950,
+          "max": 243725
+        },
+        "tax_rate": 0.32,
+        "subtract_amount": 22313.50
+      },
+      {
+        "income_range": {
+          "min": 243725,
+          "max": 609350
+        },
+        "tax_rate": 0.35,
+        "subtract_amount": 29625.25
+      },
+      {
+        "income_range": {
+          "min": 609350,
+          "max": null
+        },
+        "tax_rate": 0.37,
+        "subtract_amount": 41812.25
+      }
+    ],
+    "married_filing_jointly": [
+      {
+        "income_range": {
+          "min": 100000,
+          "max": 201050
+        },
+        "tax_rate": 0.22,
+        "subtract_amount": 9894.00
+      },
+      {
+        "income_range": {
+          "min": 201050,
+          "max": 383900
+        },
+        "tax_rate": 0.24,
+        "subtract_amount": 13915.00
+      },
+      {
+        "income_range": {
+          "min": 383900,
+          "max": 487450
+        },
+        "tax_rate": 0.32,
+        "subtract_amount": 44627.00
+      },
+      {
+        "income_range": {
+          "min": 487450,
+          "max": 731200
+        },
+        "tax_rate": 0.35,
+        "subtract_amount": 59250.50
+      },
+      {
+        "income_range": {
+          "min": 731200,
+          "max": null
+        },
+        "tax_rate": 0.37,
+        "subtract_amount": 73874.30
+      }
+    ],
+    "married_filing_separately": [
+      {
+        "income_range": {
+          "min": 100000,
+          "max": 100525
+        },
+        "tax_rate": 0.22,
+        "subtract_amount": 4947.00
+      },
+      {
+        "income_range": {
+          "min": 100525,
+          "max": 191950
+        },
+        "tax_rate": 0.24,
+        "subtract_amount": 6957.50
+      },
+      {
+        "income_range": {
+          "min": 191950,
+          "max": 243725
+        },
+        "tax_rate": 0.32,
+        "subtract_amount": 22313.50
+      },
+      {
+        "income_range": {
+          "min": 243725,
+          "max": 365600
+        },
+        "tax_rate": 0.35,
+        "subtract_amount": 29625.25
+      },
+      {
+        "income_range": {
+          "min": 365600,
+          "max": null
+        },
+        "tax_rate": 0.37,
+        "subtract_amount": 36937.25
+      }
+    ],
+    "head_of_household": [
+      {
+        "income_range": {
+          "min": 100000,
+          "max": 100500
+        },
+        "tax_rate": 0.22,
+        "subtract_amount": 6641.00
+      },
+      {
+        "income_range": {
+          "min": 100500,
+          "max": 191950
+        },
+        "tax_rate": 0.24,
+        "subtract_amount": 8651.00
+      },
+      {
+        "income_range": {
+          "min": 191950,
+          "max": 243700
+        },
+        "tax_rate": 0.32,
+        "subtract_amount": 24007.00
+      },
+      {
+        "income_range": {
+          "min": 243700,
+          "max": 609350
+        },
+        "tax_rate": 0.35,
+        "subtract_amount": 31318.00
+      },
+      {
+        "income_range": {
+          "min": 609350,
+          "max": null
+        },
+        "tax_rate": 0.37,
+        "subtract_amount": 43505.00
+      }
+    ]
+  }
+}
