@@ -201,3 +201,119 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Error: {str(e)}")
         sys.exit(1)
+
+def calculate_form_8863_part_iii(print_output: bool = True) -> float:
+    """
+    Calculate Form 8863 Part III - American Opportunity Credit (AOC) for qualified education expenses.
+
+    Returns:
+        float: Total education credit amount. Returns 0 if no credit is available
+              or if there are processing errors.
+
+    Note:
+        Currently only implements the American Opportunity Credit calculation.
+    """
+    
+    # Part III - Student and Educational Institution Information.
+    # American Opportunity Credit (AOC)
+    
+    # Line 27 - Don't enter more than $4,000.
+    AdjustedQualifiedEducationExpenses = 4000
+
+    # Line 28 - Subtract $2,000 from the amount on line 27.
+    SubtractedQualifiedEducationExpenses = AdjustedQualifiedEducationExpenses - 2000
+
+    # Line 29 - Multiply the amount on line 28 by 25% (0.25).
+    CreditForQualifiedEducationExpenses = SubtractedQualifiedEducationExpenses * 0.25
+    
+    # Line 30 - If line 28 is zero, enter amount from line 27. Otherwise, add $2,000 to line 29.
+    if SubtractedQualifiedEducationExpenses == 0:
+        TotalAmericanOpportunityCreditAmount = AdjustedQualifiedEducationExpenses
+    else:
+        TotalAmericanOpportunityCreditAmount = CreditForQualifiedEducationExpenses + 2000
+
+    return TotalAmericanOpportunityCreditAmount
+
+if __name__ == "__main__":
+    result = calculate_form_8863_part_iii(print_output=False)
+    print(f"\nFinal Form 8863 Part III American Opportunity Credit Amount: ${result:,.2f}")
+
+def calculate_form_8863_part_i(print_output: bool = True) -> float:
+    """
+    Calculate the refundable portion of the American Opportunity Credit (AOC)
+    from Form 8863 Part I. The refundable portion is up to 40% of the credit.
+
+    Args:
+        print_output (bool): If True, prints calculation details to console
+
+    Returns:
+        float: Refundable portion of the AOC. Returns 0 if no refundable
+              credit is available or if there are processing errors.
+
+    Note:
+        The refundable portion of the AOC allows taxpayers to receive up to
+        40% of the remaining credit as a refund, even if they don't owe any tax.
+    """
+    InitialAmericanOpportunityCreditAmount = calculate_form_8863_part_iii(print_output=False)
+
+    filing_status = "married_filing_jointly"
+
+    # Maximum income threshold for AOC refundable credit based on filing status
+    # Line 2 on the Form 8863
+    MaxIncomeThresholdForRefundableCredit = 180000 if filing_status == "married_filing_jointly" else 90000
+
+    # Line 3 on the Form 8863   
+    AdjustedGrossIncome = 170000
+
+    # Line 4 - Subtract AGI from income threshold. If zero or less, no education credit available
+    IncomeThresholdMinusAGI = MaxIncomeThresholdForRefundableCredit - AdjustedGrossIncome
+    if IncomeThresholdMinusAGI <= 0:
+        return 0
+
+    # Line 5 - Enter $20,000 if married filing jointly; $10,000 if single, head of household, or qualifying surviving spouse
+    PhaseoutIncomeThreshold = 20000 if filing_status == "married_filing_jointly" else 10000
+
+    # Line 6 - Calculate phase-out ratio (1.0 if above threshold, or decimal ratio if below)
+    PhaseoutRatio = 1.0 if IncomeThresholdMinusAGI >= PhaseoutIncomeThreshold else round(IncomeThresholdMinusAGI / PhaseoutIncomeThreshold, 3)
+
+    # Line 7 - Multiply line 1 by line 6 to get the phased-out credit amount
+    # The note about age requirement is ommitted for the time being.
+    PhasedOutCreditAmount = InitialAmericanOpportunityCreditAmount * PhaseoutRatio
+
+    # Line 8 - Calculate refundable portion (40% of phased out credit amount)
+    RefundableAmericanOpportunityCreditAmount = PhasedOutCreditAmount * 0.40
+    return RefundableAmericanOpportunityCreditAmount
+
+if __name__ == "__main__":
+    result = calculate_form_8863_part_i(print_output=False)
+    print(f"\nFinal Form 8863 Part I Refundable American Opportunity Credit Amount: ${result:,.2f}")
+
+
+def calculate_form_8863_part_ii(print_output: bool = True) -> float:
+    """
+    Calculate Form 8863 Part II - Nonrefundable Education Credits, which includes
+    the non-refundable portion of the American Opportunity Credit (AOC) and the
+    Lifetime Learning Credit (LLC).
+
+    Args:
+        print_output (bool): If True, prints calculation details to console
+
+    Returns:
+        float: Total nonrefundable education credit amount. Returns 0 if no credit
+              is available or if there are processing errors.
+
+    Note:
+        Nonrefundable credits can reduce your tax to zero, but unlike refundable
+        credits, they cannot result in a refund if they exceed your tax liability.
+    """
+    # Calculate initial nonrefundable education credits by subtracting the refundable portion 
+    # from the total phased out credit amount (remaining 60% of AOC)
+    InitialNonrefundableEducationCredits = calculate_form_8863_part_i(print_output=False) / 0.4 * 0.6
+    TotalLifetimeLearningCredit = 0
+    NonrefundableEducationCredits = InitialNonrefundableEducationCredits
+
+    return NonrefundableEducationCredits
+
+if __name__ == "__main__":
+    result = calculate_form_8863_part_ii(print_output=False)
+    print(f"\nFinal Form 8863 Part II Nonrefundable Education Credits Amount: ${result:,.2f}")
